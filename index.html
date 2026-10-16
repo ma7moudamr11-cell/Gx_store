@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#070a14">
+  <meta name="description" content="Gamer X Store — متجر ألعاب وتطبيقات سريع ومتحرك ومهيأ للموبايل.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="logo.webp" type="image/webp">
+  <title>Gamer X Store</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="settings.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" defer></script>
+  <script src="supabase-config.js"></script>
+  <script src="gx-features.js"></script>
+</head>
+<body>
+  <div class="bg-scene" aria-hidden="true">
+    <div class="grid-floor"></div><i class="orb orb-a"></i><i class="orb orb-b"></i><i class="orb orb-c"></i>
+    <div class="particles" id="particles"></div>
+  </div>
+
+  <a class="skip-link" href="#main-content">تخطي إلى المحتوى الرئيسي</a>
+
+  <header class="header" id="top">
+    <div class="brand">
+      <div class="logo"><img src="logo.webp" alt="شعار Gamer X Store" width="48" height="48" decoding="async"></div>
+      <div class="brand-name">Gamer <span>X</span> Store</div>
+    </div>
+    <div class="header-actions">
+      <button class="account-chip" id="accountBtn" type="button" aria-label="الحساب" title="الحساب">
+        <span class="account-avatar" id="accountAvatar">GX</span>
+        <span class="account-label" id="accountLabel">تسجيل الدخول</span>
+      </button>
+      <button class="header-btn" id="searchBtn" type="button" aria-label="البحث" title="البحث">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg>
+      </button>
+      <button class="header-btn" id="downloadsBtn" type="button" aria-label="التنزيلات" title="التنزيلات">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11"/><path d="m7.5 10 4.5 4.5 4.5-4.5"/><path d="M5 18.5v1.2A1.3 1.3 0 0 0 6.3 21h11.4a1.3 1.3 0 0 0 1.3-1.3v-1.2"/></svg>
+      </button>
+      <button class="header-btn" id="settingsBtn" type="button" aria-label="الإعدادات" title="الإعدادات">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6Z"/><path d="m19.1 13.1 1.3 1-.9 2.1-1.6-.2a7.8 7.8 0 0 1-1.4 1.4l.2 1.6-2.1.9-1-1.3a7.8 7.8 0 0 1-2 .1l-1 1.3-2.1-.9.2-1.6a7.8 7.8 0 0 1-1.4-1.4l-1.6.2-.9-2.1 1.3-1a7.8 7.8 0 0 1-.1-2l-1.3-1 .9-2.1 1.6.2a7.8 7.8 0 0 1 1.4-1.4l-.2-1.6 2.1-.9 1 1.3a7.8 7.8 0 0 1 2-.1l1-1.3 2.1.9-.2 1.6a7.8 7.8 0 0 1 1.4 1.4l1.6-.2.9 2.1-1.3 1a7.8 7.8 0 0 1 .1 2Z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero reveal">
+      <div class="hero-text">
+        <span class="hero-eyebrow"><span class="pulse-dot"></span> GAMER X STORE</span>
+        <h1>كل ألعابك وتطبيقاتك<br><strong>في مكان واحد.</strong></h1>
+        <p>واجهة أسرع، بطاقات أنظف، خلفية حية، ونظام تنزيل متابع خطوة بخطوة — مع الحفاظ على التصميم الخفيف.</p>
+        <div class="hero-search">
+          <div class="search-wrap">
+            <span class="search-leading"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></span>
+            <label class="visually-hidden" for="searchInput">ابحث عن لعبة أو تطبيق</label>
+            <input id="searchInput" class="search" type="search" placeholder="ابحث عن لعبة أو تطبيق..." autocomplete="off" maxlength="80">
+            <button id="searchClear" class="search-clear" type="button" aria-label="مسح البحث" hidden>×</button>
+          </div>
+          <button id="heroSearchBtn" class="hero-search-btn" type="button"><span>بحث</span><svg viewBox="0 0 24 24"><path d="M5 12h13"/><path d="m13 6 6 6-6 6"/></svg></button>
+        </div>
+        <div class="quick-stats"><span><b id="productCount">0</b> عنصر</span><span><b id="savedCount">0</b> محفوظ</span><span><b id="activeDownloads">0</b> تنزيل نشط</span></div>
+      </div>
+      <div class="hero-visual purple-showcase" aria-label="واجهة Gamer X Store">
+        <div class="showcase-glow"></div>
+        <div class="showcase-grid"></div>
+        <div class="showcase-card">
+          <div class="showcase-top"><span class="mini-brand">GAMER <b>X</b> STORE</span><span class="live-dot"></span></div>
+          <div class="showcase-content"><span class="showcase-kicker">DISCOVER • DOWNLOAD • PLAY</span><h2>عالمك الرقمي<br><strong>يبدأ من هنا.</strong></h2><p>ألعاب وتطبيقات مختارة، تنزيلات واضحة، وتجربة متجر سريعة.</p><div class="showcase-pills"><span>🎮 ألعاب</span><span>⚡ سريع</span><span>⬇ آمن</span></div></div>
+          <div class="showcase-orb orb-main"></div><div class="showcase-orb orb-small"></div>
+          <div class="showcase-account"><span class="account-avatar">GX</span><div><b>حسابك</b><small>سجّل الدخول</small></div></div>
+        </div>
+        <div class="float-chip chip-a">⚡ سرعة</div><div class="float-chip chip-b">⬇ تحميل</div><div class="float-chip chip-c">★ مميز</div>
+      </div>
+    </section>
+
+    <div class="categories" role="group" aria-label="تصفية حسب التصنيف">
+      <button class="category active" data-filter="all" aria-pressed="true">الكل</button>
+      <button class="category" data-filter="games" aria-pressed="false">ألعاب</button>
+      <button class="category" data-filter="apps" aria-pressed="false">تطبيقات</button>
+      <button class="category" data-filter="tools" aria-pressed="false">أدوات</button>
+      <button class="category" data-filter="featured" aria-pressed="false">مميزة</button>
+      <button class="category" data-filter="saved" aria-pressed="false">المفضلة</button>
+    </div>
+
+    <section class="section reveal" id="storeSection">
+      <div class="section-head">
+        <div><span class="section-kicker">STORE COLLECTION</span><h2 class="section-title">أحدث الإضافات</h2></div>
+        <button class="view-all" id="viewAll" type="button">عرض الكل <span>←</span></button>
+      </div>
+
+      <div class="products" id="productsGrid"></div>
+      <p class="empty-state" id="emptyState">لا توجد نتائج مطابقة لبحثك.</p>
+    </section>
+
+    <section class="feature-strip reveal">
+      <div><span class="feature-icon">↯</span><div><strong>واجهة متحركة</strong><small>إضاءة وجزيئات خفيفة بدون ثقل بصري.</small></div></div>
+      <div><span class="feature-icon">⬇</span><div><strong>تنزيل محسّن</strong><small>حالة تقدم، إلغاء، وإشعار بالنتيجة.</small></div></div>
+      <div><span class="feature-icon">★</span><div><strong>حفظ سريع</strong><small>المفضلة محفوظة محليًا على جهازك.</small></div></div>
+      <div><span class="feature-icon">⌁</span><div><strong>Responsive</strong><small>يتكيف مع الهاتف والتابلت والكمبيوتر.</small></div></div>
+    </section>
+  </main>
+
+  <div class="account-menu" id="accountMenu" hidden>
+    <div class="account-menu-head"><span class="account-avatar large" id="menuAvatar">GX</span><div><strong id="menuName">زائر</strong><small id="menuEmail">سجّل الدخول لحفظ بياناتك</small></div></div>
+    <button type="button" class="account-menu-item" id="profileBtn">الملف الشخصي</button>
+    <button type="button" class="account-menu-item developer-only" id="developerAreaBtn" hidden>منطقة المطور</button>
+    <button type="button" class="account-menu-item" id="loginMenuBtn">تسجيل الدخول</button>
+    <button type="button" class="account-menu-item danger" id="logoutBtn" hidden>تسجيل الخروج</button>
+  </div>
+
+  <div class="modal-backdrop" id="authModal" hidden>
+    <section class="panel auth-panel" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <button class="modal-close" id="authClose" aria-label="إغلاق">×</button>
+      <span class="section-kicker">GAMER X ACCOUNT</span>
+      <h2 id="authTitle">تسجيل الدخول</h2>
+      <p class="auth-note">أنشئ حسابًا لحفظ المفضلة والتحميلات والملف الشخصي ومزامنة بياناتك بين أجهزتك.</p>
+      <div class="auth-tabs"><button class="auth-tab active" data-auth-mode="login">دخول</button><button class="auth-tab" data-auth-mode="register">إنشاء حساب</button></div>
+      <form id="authForm" autocomplete="on">
+        <label class="auth-field" id="nameField" hidden><span>الاسم</span><input id="authName" type="text" maxlength="40" autocomplete="name" placeholder="اسمك"></label>
+        <label class="auth-field"><span>البريد الإلكتروني</span><input id="authEmail" type="email" maxlength="120" autocomplete="email" required placeholder="name@example.com"></label>
+        <label class="auth-field"><span>كلمة المرور</span><input id="authPassword" type="password" minlength="8" maxlength="128" autocomplete="current-password" required placeholder="8 أحرف على الأقل"></label>
+        <div class="password-strength" id="passwordStrength" aria-live="polite"></div>
+        <button class="modal-action" type="submit" id="authSubmit">دخول</button>
+      </form>
+      <div class="auth-status" id="authStatus" role="status" aria-live="polite"></div>
+      <small class="auth-security">حسابك محفوظ بأمان، وكلمة المرور لا تُخزَّن في الموقع.</small>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="emailVerifyModal" hidden>
+    <section class="panel auth-panel" role="dialog" aria-modal="true" aria-labelledby="emailVerifyTitle">
+      <button class="modal-close" id="emailVerifyClose" aria-label="إغلاق">×</button>
+      <span class="section-kicker">EMAIL VERIFICATION</span>
+      <h2 id="emailVerifyTitle">تأكيد البريد الإلكتروني</h2>
+      <p class="auth-note">أرسلنا رمز تأكيد من 8 خانات إلى بريدك الإلكتروني. أدخل الرمز لإكمال إنشاء الحساب.</p>
+      <label class="auth-field"><span>رمز التأكيد</span><input id="emailVerifyCode" type="text" inputmode="text" maxlength="8" autocomplete="one-time-code" placeholder="XXXXXXXX"></label>
+      <button class="modal-action" id="emailVerifySubmit" type="button">تأكيد البريد</button>
+      <button class="auth-secondary" id="emailVerifyResend" type="button">إرسال رمز جديد</button>
+      <div class="auth-status" id="emailVerifyStatus" role="status" aria-live="polite"></div>
+      <div class="demo-code" id="emailDemoCode" hidden></div>
+      <small class="auth-security">حسابك محفوظ بأمان، وكلمة المرور لا تُخزَّن في الموقع.</small>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="profileSetupModal" hidden>
+    <section class="panel auth-panel" role="dialog" aria-modal="true" aria-labelledby="profileSetupTitle">
+      <span class="section-kicker">PROFILE SETUP</span>
+      <h2 id="profileSetupTitle">إعداد ملفك الشخصي</h2>
+      <p class="auth-note">أكمل بيانات ملفك الشخصي قبل دخول Gamer X Store.</p>
+      <form id="profileSetupForm">
+        <label class="auth-field"><span>اسم المستخدم</span><input id="profileUsername" type="text" maxlength="24" autocomplete="username" placeholder="اسم المستخدم" required></label>
+        <label class="auth-field"><span>الاسم الظاهر</span><input id="profileDisplayName" type="text" maxlength="40" autocomplete="name" placeholder="الاسم الذي سيظهر في المتجر" required></label>
+        <button class="modal-action" type="submit">حفظ ومتابعة</button>
+      </form>
+      <div class="auth-status" id="profileSetupStatus" role="status" aria-live="polite"></div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+
+
+
+
+
+  <div class="modal-backdrop" id="devRequestModal" hidden>
+    <section class="panel auth-panel" role="dialog" aria-modal="true" aria-labelledby="devRequestTitle">
+      <button class="modal-close" data-close="devRequestModal" aria-label="إغلاق">×</button>
+      <span class="section-kicker">DEVELOPER ACCOUNT</span>
+      <h2 id="devRequestTitle">طلب حساب مطور</h2>
+      <p class="auth-note">بعد التفعيل يتحول حسابك إلى حساب مطور، وتفتح «حساب المطور» لنشر تطبيقاتك وإدارتها.</p>
+      <ul class="dv-perks">
+        <li>إضافة تطبيق أو لعبة أو أداة مع ملف APK ولوجو ووصف</li>
+        <li>متابعة التنزيلات وعدد من أضافوا تطبيقك للمفضلة</li>
+        <li>تعديل الاسم والوصف واللوجو أو إزالة تطبيقك في أي وقت</li>
+      </ul>
+      <label class="dv-check"><input type="checkbox" id="devAgree"><span>أتعهد أن التطبيقات التي أنشرها تخصني ولا تحتوي على برمجيات ضارة.</span></label>
+      <button class="modal-action" id="devRequestSubmit" type="button">طلب حساب مطور</button>
+      <div class="auth-status" id="devRequestStatus" role="status" aria-live="polite"></div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="devAccountModal" hidden>
+    <section class="panel dv-panel" role="dialog" aria-modal="true" aria-labelledby="dvTitle">
+      <button class="modal-close" data-close="devAccountModal" aria-label="إغلاق">×</button>
+      <span class="section-kicker">DEVELOPER ACCOUNT</span>
+      <h2 id="dvTitle">حساب المطور <span class="gx-dev-badge">★ مطور</span></h2>
+      <div class="dv-tabs" role="tablist" aria-label="أقسام حساب المطور">
+        <button class="dv-tab active" type="button" role="tab" data-dv-tab="add">إضافة تطبيق</button>
+        <button class="dv-tab" type="button" role="tab" data-dv-tab="manage">إدارة تطبيقاتك</button>
+      </div>
+      <div class="auth-status" id="dvMsg" role="status" aria-live="polite"></div>
+
+      <section class="dv-section" data-dv-section="add">
+        <label class="auth-field"><span>اسم التطبيق (إجباري)</span><input id="dvName" maxlength="60" placeholder="مثال: Gamer X Tools" autocomplete="off"></label>
+        <label class="auth-field"><span>التصنيف</span><select id="dvCategory"><option value="apps">تطبيق</option><option value="games">لعبة</option><option value="tools">أداة</option></select></label>
+        <label class="auth-field"><span>الوصف (اختياري)</span><textarea id="dvDesc" maxlength="1000" rows="4" placeholder="اكتب وصفًا يظهر في صفحة التطبيق..."></textarea></label>
+        <div class="auth-field">
+          <span>لوجو التطبيق</span>
+          <div class="dv-logo-row">
+            <div class="dv-logo-preview" id="dvLogoPreview" aria-hidden="true">GX</div>
+            <div class="dv-logo-actions">
+              <label class="secondary-action dv-file-btn" for="dvLogo">رفع لوجو</label>
+              <input id="dvLogo" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+              <button class="secondary-action" id="dvLogoClear" type="button" hidden>إزالة</button>
+            </div>
+          </div>
+          <small class="dv-hint">صورة مربعة يفضل، حتى 2MB.</small>
+        </div>
+        <div class="auth-field">
+          <span>ملف APK (إجباري)</span>
+          <label class="secondary-action dv-file-btn dv-apk-btn" for="dvApk" id="dvApkLabel">اختيار ملف APK</label>
+          <input id="dvApk" type="file" accept=".apk,application/vnd.android.package-archive" hidden>
+          <small class="dv-hint">الحد الأقصى 50MB.</small>
+        </div>
+        <button class="modal-action" id="dvPublish" type="button">نشر التطبيق</button>
+      </section>
+
+      <section class="dv-section" data-dv-section="manage" hidden>
+        <div class="dv-grid" id="dvSummary"></div>
+        <div id="dvApps"></div>
+      </section>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="dvConfirmModal" hidden>
+    <section class="panel auth-panel" role="alertdialog" aria-modal="true" aria-labelledby="dvConfirmTitle">
+      <h2 id="dvConfirmTitle">تأكيد</h2>
+      <p class="auth-note" id="dvConfirmText"></p>
+      <button class="danger-action dv-confirm-ok" id="dvConfirmOk" type="button">نعم</button>
+      <button class="auth-secondary" id="dvConfirmCancel" type="button">إلغاء</button>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="detailsModal" hidden><section class="panel details-panel" role="dialog" aria-modal="true" aria-labelledby="detailsTitle"><button class="modal-close" data-close="detailsModal" aria-label="إغلاق">×</button><div class="details-hero"><div class="details-art" id="detailsArt">GX</div><div><span class="section-kicker">APP DETAILS</span><h2 id="detailsTitle">التفاصيل</h2><p id="detailsText"></p></div></div><div class="details-stats"><div><span>الإصدار</span><b id="detailsVersion">—</b></div><div><span>المطور</span><b id="detailsDeveloper">—</b></div><div><span>التقييم</span><b id="detailsRating">—</b></div><div><span>التحديث</span><b id="detailsUpdated">—</b></div></div><div class="details-actions"><button class="modal-action" id="detailsDownload">تحميل الآن</button><button class="secondary-action" data-close="detailsModal">إغلاق</button></div></section></div>
+
+  <div class="modal-backdrop" id="profileModal" hidden>
+    <section class="panel profile-panel" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
+      <button class="modal-close" data-close="profileModal" aria-label="إغلاق">×</button>
+      <span class="section-kicker">MY GAMER X ACCOUNT</span>
+      <div class="profile-hero">
+        <div class="profile-cover"></div>
+        <div class="account-avatar large" id="profileAvatar">GX</div>
+        <div class="profile-id">
+          <h2 id="profileTitle">الملف الشخصي</h2>
+          <p class="gx-username" id="gxUsername" hidden></p>
+          <p class="profile-email" id="profileEmail">سجّل الدخول لعرض بياناتك.</p>
+          <span class="gx-role-chip" id="gxRoleChip" hidden></span>
+        </div>
+      </div>
+      <div class="profile-stats">
+        <div><b id="psSaved">0</b><small>محفوظات</small></div>
+        <div><b id="psDl">0</b><small>تحميلات</small></div>
+        <div><b id="psRole">—</b><small>نوع الحساب</small></div>
+      </div>
+      <div class="profile-tabs" role="tablist" aria-label="أقسام الملف الشخصي">
+        <button class="profile-tab active" type="button" data-profile-tab="data">بياناتي</button>
+        <button class="profile-tab" type="button" data-profile-tab="saved">المحفوظات</button>
+        <button class="profile-tab" type="button" data-profile-tab="downloads">التحميلات</button>
+      </div>
+      <section class="profile-section active" data-profile-section="data">
+        <div class="profile-data-grid">
+          <label><span>الاسم</span><input id="profileNameInput" maxlength="40" placeholder="اسمك"></label>
+          <label><span>البريد الإلكتروني</span><input id="profileEmailInput" type="email" disabled></label>
+          <label><span>نوع الحساب</span><input id="profileRoleInput" disabled></label>
+          <label><span>تاريخ الإنشاء</span><input id="profileCreatedInput" disabled></label>
+        </div>
+        <button class="modal-action" id="saveProfileBtn" type="button">حفظ بيانات المستخدم</button>
+      </section>
+      <section class="profile-section" data-profile-section="saved" hidden><div id="profileSavedList" class="profile-list"><div class="profile-empty">لا توجد محفوظات حتى الآن.</div></div></section>
+      <section class="profile-section" data-profile-section="downloads" hidden><div id="profileDownloadsList" class="profile-list"><div class="profile-empty">لا توجد تحميلات مسجلة حتى الآن.</div></div></section>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="settingsModal" hidden>
+    <section class="panel settings-panel" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+      <button class="modal-close" data-close="settingsModal" aria-label="إغلاق">×</button>
+      <span class="section-kicker">STORE SETTINGS</span>
+      <h2 id="settingsTitle">الإعدادات</h2>
+
+      <div class="settings-tabs" role="tablist" aria-label="أقسام الإعدادات">
+        <button class="settings-tab active" type="button" data-settings-tab="backgrounds">الخلفيات</button>
+        <button class="settings-tab" type="button" data-settings-tab="designs">التصاميم</button>
+        <button class="settings-tab" type="button" data-settings-tab="store">المتجر</button>
+        <button class="settings-tab" type="button" data-settings-tab="account">الحساب</button>
+        <button class="settings-tab" type="button" data-settings-tab="developer">المطور</button>
+        <button class="settings-tab" type="button" data-settings-tab="data">البيانات</button>
+      </div>
+
+      <section class="settings-section active" id="backgroundSettings" data-settings-section="backgrounds">
+        <div class="settings-section-head"><div><h3>الخلفية</h3><p>اختَر خلفية ثابتة أو مؤثرًا متحركًا أو ارفع صورتك الخاصة.</p></div></div>
+        <div class="background-label">خلفيات ثابتة</div>
+        <div class="background-grid">
+          <button class="background-card bg-choice active" type="button" data-bg="default"><span class="bg-preview bg-preview-default"></span><b>Gamer X</b></button>
+          <button class="background-card bg-choice" type="button" data-bg="midnight"><span class="bg-preview bg-preview-midnight"></span><b>Midnight</b></button>
+          <button class="background-card bg-choice" type="button" data-bg="violet"><span class="bg-preview bg-preview-violet"></span><b>Violet</b></button>
+          <button class="background-card bg-choice" type="button" data-bg="ocean"><span class="bg-preview bg-preview-ocean"></span><b>Ocean</b></button>
+          <button class="background-card bg-choice" type="button" data-bg="sunset"><span class="bg-preview bg-preview-sunset"></span><b>Sunset</b></button>
+        </div>
+
+        <div class="background-label">خلفيات متحركة</div>
+        <div class="motion-grid">
+          <button class="motion-card motion-choice active" type="button" data-motion-bg="particles"><span>✦</span><b>الجزيئات</b><small>حركة خفيفة</small></button>
+          <button class="motion-card motion-choice" type="button" data-motion-bg="aurora"><span>◌</span><b>الشفق</b><small>توهج متدرج</small></button>
+          <button class="motion-card motion-choice" type="button" data-motion-bg="grid"><span>⌁</span><b>الشبكة</b><small>حركة تقنية</small></button>
+          <button class="motion-card motion-choice" type="button" data-motion-bg="none"><span>○</span><b>بدون حركة</b><small>خلفية ثابتة</small></button>
+        </div>
+        <label class="switch-row"><span><b>تفعيل الحركة</b><small>يمكنك إيقاف كل المؤثرات المتحركة مع الاحتفاظ بالخلفية.</small></span><input id="motionToggle" type="checkbox" checked><i class="switch"></i></label>
+
+        <div class="background-label">صورتك الخاصة</div>
+        <div class="upload-background">
+          <label class="upload-bg-btn" for="backgroundImageInput">رفع صورة كخلفية</label>
+          <input id="backgroundImageInput" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+          <button type="button" class="secondary-action" id="removeBackgroundBtn">إزالة الصورة</button>
+        </div>
+        <p class="background-note">الصورة تُضغط تلقائيًا قبل الحفظ لتقليل مساحة التخزين على الجهاز.</p>
+      </section>
+
+      <section class="settings-section" id="designSettings" data-settings-section="designs" hidden>
+        <div class="settings-section-head"><div><h3>تصاميم الخلفيات</h3><p>9 تصاميم بنفسجي وأسود وأزرق غامق. اختر النوع والحركة والكثافة والألوانوفعّلها على المتجر.</p></div></div>
+        <div class="gx-preview"><div class="gxp" id="gxPreview"></div></div>
+        <div class="design-state" id="designState"></div>
+        <div class="background-label">النوع</div><div class="design-chips" id="designTypes"></div>
+        <div class="background-label">الحركة</div><div class="design-chips" id="designAnim"></div>
+        <div class="background-label">الكثافة</div><div class="design-chips" id="designDens"></div>
+        <div class="background-label">الألوان</div><div class="design-chips" id="designPal"></div>
+        <div class="account-actions">
+          <button type="button" class="secondary-action" id="designRandom">شكل عشوائي جديد</button>
+          <button type="button" class="danger-action" id="designOff" hidden>إيقاف التصميم</button>
+        </div>
+      </section>
+
+      <section class="settings-section" id="storeSettings" data-settings-section="store" hidden>
+        <div class="settings-section-head"><div><h3>خيارات المتجر</h3><p>تحكم في طريقة عرض التطبيقات والتحميل والمفضلة.</p></div></div>
+        <div class="settings-group"><div class="settings-group-title">العرض</div>
+          <label class="pref-row"><span><b>الفئة الافتراضية</b><small>الفئة التي تُعرض عند دخول المتجر.</small></span><select id="prefCategory"><option value="all">الكل</option><option value="games">ألعاب</option><option value="apps">تطبيقات</option><option value="tools">أدوات</option><option value="saved">المفضلة</option></select></label>
+          <label class="pref-row"><span><b>ترتيب التطبيقات</b><small>طريقة ترتيب البطاقات في المتجر.</small></span><select id="prefSort"><option value="new">الأحدث</option><option value="top">الأكثر تحميلًا</option><option value="name">الاسم</option></select></label>
+        </div>
+        <div class="settings-group"><div class="settings-group-title">التحميل</div>
+          <label class="switch-row"><span><b>تأكيد قبل التحميل</b><small>اسألني قبل بدء أي تنزيل.</small></span><input id="prefConfirm" type="checkbox"><i class="switch"></i></label>
+        </div>
+        <div class="settings-group"><div class="settings-group-title">المفضلة والتفاعل</div>
+          <label class="switch-row"><span><b>حفظ المفضلة</b><small>السماح بإضافة تطبيقات جديدة إلى المفضلة.</small></span><input id="saveToggle" type="checkbox" checked><i class="switch"></i></label>
+          <label class="switch-row"><span><b>اهتزاز خفيف للأزرار</b><small>تأثير صغير عند التفاعل.</small></span><input id="fxToggle" type="checkbox" checked><i class="switch"></i></label>
+        </div>
+      </section>
+
+      <section class="settings-section" id="accountSettings" data-settings-section="account" hidden>
+        <div class="settings-section-head"><div><h3>إدارة الحساب</h3><p>ملفك الشخصي وتسجيل الخروج.</p></div></div>
+        <div class="account-settings-card" id="accountSettingsCard">
+          <span class="account-avatar large" id="settingsAvatar">GX</span>
+          <div><b id="settingsAccountName">زائر</b><small id="settingsAccountEmail">سجّل الدخول لإدارة حسابك</small></div>
+        </div>
+        <div class="account-actions">
+          <button type="button" class="secondary-action" id="settingsProfileBtn">الملف الشخصي</button>
+          <button type="button" class="secondary-action" id="settingsLogoutBtn">تسجيل الخروج</button>
+          <button type="button" class="danger-action" id="settingsDeleteAccountBtn">حذف الحساب الحالي</button>
+        </div>
+      </section>
+
+      <section class="settings-section" id="developerSettings" data-settings-section="developer" hidden>
+        <div class="settings-section-head"><div><h3>منطقة المطور</h3><p>اطلب حساب مطور، ثم انشر تطبيقاتك وألعابك وأدواتك وتابع أرقامها.</p></div></div>
+        <div class="dev-zone" id="gxDevZone"><div class="profile-empty">جاري التحميل…</div></div>
+      </section>
+
+      <section class="settings-section" id="dataSettings" data-settings-section="data" hidden>
+        <div class="data-center">
+          <div class="data-center-head"><div><span class="section-kicker">DATA CENTER</span><h3>بيانات المتجر</h3></div><span class="data-version" id="dataVersion">v3</span></div>
+          <div class="data-stats" id="dataStats"><div><b id="dataAccounts">0</b><small>حسابات</small></div><div><b id="dataSaved">0</b><small>محفوظات</small></div><div><b id="dataApps">0</b><small>تطبيقات مطور</small></div><div><b id="dataStorage">0 KB</b><small>تخزين محلي</small></div></div>
+          <p class="data-note">النسخة الاحتياطية لا تتضمن كلمات المرور. حذف بيانات المتجر يمسح بيانات الحسابات والمفضلة والإعدادات المحلية.</p>
+          <div class="data-actions"><button type="button" class="secondary-action" id="exportDataBtn">تصدير نسخة احتياطية</button><button type="button" class="secondary-action" id="importDataBtn">استيراد نسخة</button><input id="importDataFile" type="file" accept="application/json" hidden></div>
+          <button type="button" class="danger-action" id="clearAllDataBtn">حذف جميع بياناتي</button>
+        </div>
+      </section>
+
+      <button class="modal-action" data-close="settingsModal">تم</button>
+    </section>
+  </div>
+
+  <div class="downloads-drawer" id="downloadsDrawer" aria-hidden="true">
+    <div class="drawer-head"><div><span class="section-kicker">DOWNLOAD CENTER</span><h2>التنزيلات</h2></div><button class="modal-close" id="downloadsClose" aria-label="إغلاق">×</button></div>
+    <div id="downloadList" class="download-list"><div class="download-empty">لا توجد تنزيلات حاليًا.</div></div>
+  </div>
+  <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+
+  <footer>© 2026 Gamer X Store — نسخة واجهة المتجر</footer>
+  <script src="app.js" defer></script>
+  <script src="settings.js" defer></script>
+<script src="online-auth.js" defer></script>
+<script src="favorites-sync.js" defer></script>
+<script src="developer-account.js" defer></script>
+<script src="developer-console.js" defer></script>
+<script src="store-catalog.js" defer></script>
+<script src="profile-plus.js" defer></script>
+<script src="store-extras.js" defer></script>
+</body>
+</html>
